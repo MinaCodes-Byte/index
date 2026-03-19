@@ -6,8 +6,7 @@
     <title>EID_VAULT_v4.0_SECURE</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <style>
-        body { margin: 0; background: #F2F2F2; color: #27EBF5; font-family: 'Courier New', monospace; display: flex; justify-content: center; align-items: center; height: 85vh; overflow: hidden; }
-        .terminal-box { padding: 30px; border: 1px solid #27EBF5; background: #F2F2F2; box-shadow: 0 0 15px #27EBF5; text-align: center; max-width: 400px; position: relative; }
+        body { margin: 0; background: url(https://i.pinimg.com/1200x/2c/6f/48/2c6f48ccb84e36748cc5e63129b64111.jpg); color: ##FFD700; font-family: 'Courier New', monospace; display: flex; justify-content: center; align-items: center; height: 85vh; overflow: hidden; }
         @keyframes flicker { 0% { opacity: 0.9; } 5% { opacity: 0.4; } 10% { opacity: 0.9; } 15% { opacity: 0.1; } 20% { opacity: 0.9; } 100% { opacity: 1; } }
         .glitching { animation: flicker 0.15s infinite; }
         #error-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #F2F2F2; color: 00001A; padding: 50px; box-sizing: border-box; font-family: sans-serif; z-index: 500; }
@@ -17,24 +16,24 @@
         #ghost-emoji { font-size: 18rem; z-index: 1000; position: relative; animation: shake 0.08s infinite; }
         @keyframes shake { 0% { transform: translate(10px, 10px); } 50% { transform: translate(-10px, -10px); } 100% { transform: translate(10px, -10px); } }
         .blood-text { position: absolute; bottom: 8%; color: #ff0000; font-size: 3.0rem; z-index: 1000; text-shadow: 5px 5px #F2F2F2; font-weight: bold; text-align: center; width: 85%; }
-        input { background:transparent; color:#27EBF5; border:none; border-bottom:1px solid #00001A; outline:none; text-align:center; font-size: 1.3rem; width: 60%; }
-        .leaderboard { font-size: 0.75rem; text-align: left; margin-top: 15px; color: #FF0000; border-top: 1px solid #333; padding-top: 10px; }
+        input { background:transparent; color:##FFD700; border:none; border-bottom:1px solid #00001A; outline:none; text-align:center; font-size: 1.3rem; width: 60%; }
+        .leaderboard { font-size: 0.75rem; text-align: left; margin-top: 15px; color: #00001A; border-top: 1px solid #333; padding-top: 10px; }
         
         /* THE NEW BUTTON */
-        #sync-btn { background: #27EBF5; color: #F2F2F2; border: 2px solid #27EBF5; padding: 15px; font-size: 1rem; cursor: pointer; box-shadow: 0 0 10px #27EBF5; width: 95%; text-transform: uppercase; margin-top: 15px; font-weight: bold; }
-        #sync-btn:active { background: #27EBF5; color: #F2F2F2; }
+        #sync-btn { background: url(https://i.pinimg.com/1200x/2c/6f/48/2c6f48ccb84e36748cc5e63129b64111.jpg); color: #00001A; border: 2px solid #F5278E; padding: 15px; font-size: 1rem; cursor: pointer; box-shadow: 0 0 10px #F5278E; width: 95%; text-transform: uppercase; margin-top: 15px; font-weight: bold; }
+        #sync-btn:active { background: url(https://i.pinimg.com/1200x/2c/6f/48/2c6f48ccb84e36748cc5e63129b64111.jpg); color: #00001A; }
     </style>
 </head>
 <body>
 
-<audio id="scream" src="https://www.fesliyanstudios.com/play-mp3/4351"></audio>
-<audio id="static" src="https://www.fesliyanstudios.com/play-mp3/2388" Infinite Loop:></audio>
+<audio id="scream" src="https://www.myinstants.com/media/sounds/chipmunk-laugh.mp3"></audio>
+<audio id="static" src="https://www.fesliyanstudios.com/play-mp3/2388"loop:></audio>
 
 <div id="setup-screen">
     <div class="terminal-box">
         <h1 style="font-size: 1.5rem;">> EID_REWARD_SYSTEM_V4</h1>
 		<h2 style="font-size: 1.0rem;">> EID_MUBARAK_TO_MY_DEAR_DEBTORS😎!</h2>
-	    <h3 style="font-size: 1.2rem,">> SINCE YOU ARE HERE DON'T TRY TO RUN! YOU ARE ALREADY HERE SO CONTINUE DON'T YOU DARE🧐</h3>
+	    <h3 style="font-size: 1.2rem,">> SINCE YOU ARE HERE ITS MEAN YOU WANT MONEY FROM ME ON THIS EID🧐</h3>
         <p>IDENTIFY RECIPIENT:</p>
         <input type="text" id="userName" placeholder="ENTER NAME...">
         <br>
@@ -47,8 +46,8 @@
         <h2 id="msg">> USER: [SEARCHING]</h2>
         <div class="leaderboard">
             <p><strong>MOST WANTED (EIDI TAX EVADERS):</strong></p>
-            <p>1. AIZA - [AT LARGE]</p>
-            <p>2. HAJRA - [TRACKED]</p>
+            <p>1. MARINELLO - [AT LARGE]</p>
+            <p>2. ELENA - [TRACKED]</p>
             <p>3. <span id="target-name">...</span> - [TARGETED]</p>
         </div>
         <p style="margin-top: 20px;">SECURITY PROTOCOL: CLICK UNTIL REACH 100%</p>
@@ -94,7 +93,7 @@
 		"shanzay": "SHANZAY.jpeg",
 		"hareem": "HAREEM.jpeg",
     };
-
+	
     async function startPrank() {
         userName = document.getElementById("userName").value.toLowerCase().trim();
         if (!userName) return alert("NAME REQUIRED.");
@@ -113,7 +112,7 @@
     function tapProgress() {
         taps++;
         staticSound.play();
-        staticSound.volume = taps * 0.14; 
+        staticSound.volume = taps * 0.1; 
         document.getElementById("progress-text").innerText = `DATA INTEGRITY: ${Math.floor((taps/5)*100)}%`;
         if (taps > 3) document.getElementById("main-card").classList.add("glitching");
         
@@ -135,12 +134,12 @@
             ghostImg.src = photoDatabase[userName];
             ghostImg.style.display = "block";
             ghostEmoji.style.display = "none";
-            label.innerText = "I SEE YOU, EIDI TAX EVADER, GIVE ME MY EIDI! OR ELSE YOU ARE IN DANGER CUZ I AM COMING SOON! " + userName.toUpperCase();
+            label.innerText = "EIDI DEPOSITED... OOPS, THAT WASN'T CASH! 💨" + userName.toUpperCase();
         } else {
-            ghostEmoji.innerText = ["🧟", "🤡", "👹", "💀", "👽", "☠️", "🩻"][Math.floor(Math.random() * 4)];
+            ghostEmoji.innerText = ["🤡", "👹", "💀", "👽", "☠️", "🩻", "🧟",][Math.floor(Math.random() * 4)];
             ghostEmoji.style.display = "block";
             ghostImg.style.display = "none";
-            label.innerText = "LOOK BEHIND YOU! YOU ARE ONE OF THE EIDI TAX EVADER, GIVE ME MY EIDI OR ELSE YOU ARE IN A GREAT DANGER CUZ,I AM COMING SOON!";
+            label.innerText = "EIDI DEPOSITED... OOPS, THAT WASN'T CASH! 💨 HAHAHAH😂";
         }
         document.getElementById("scream").play();
         overlay.style.display = "flex";
