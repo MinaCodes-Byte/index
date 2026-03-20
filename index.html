@@ -1,229 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EID Vault</title>
-
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#B76E5F">
-<link rel="icon" href="Favicon.png">
-
-<style>
-body {
-    margin: 0;
-    background: url(https://i.pinimg.com/1200x/2c/6f/48/2c6f48ccb84e36748cc5e63129b64111.jpg);
-    background-size: cover;
-    background-position: center;
-    color: #FFD700;
-    font-family: 'Courier New', monospace;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    min-height: 100vh;
-    padding: 20px;
-}
-
-/* Container */
-.terminal-box {
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-    background: rgba(0,0,0,0.7);
-    border-radius: 15px;
-    text-align: center;
-}
-
-/* Input (SMALLER) */
-input {
-    width: 70%;
-    padding: 10px;
-    font-size: 0.9rem;
-    border-radius: 10px;
-    border: none;
-    display: block;
-    margin: 10px auto;
-    text-align: center;
-}
-
-/* Button */
-#sync-btn {
-    width: 100%;
-    padding: 14px;
-    margin-top: 15px;
-    border-radius: 12px;
-    border: none;
-    background: #B76E5F;
-    color: white;
-    font-size: 1rem;
-}
-
-/* BIGGER TEXT */
-h1 { font-size: 1.6rem; }
-h2 { font-size: 1.3rem; }
-h3 { font-size: 1.1rem; }
-p { font-size: 1rem; }
-
-/* Overlay */
-#jumpscare-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-
-    display: none;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background: BLACK;
-    z-index: 999;
-}
-
-#ghost-emoji {
-    font-size: 8rem;
-}
-
-.blood-text {
-    color: red;
-    font-size: 2rem;
-    margin-top: 20px;
-    text-align: center;
-}
-
-/* Scan */
-#scan-overlay {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: BLACK;
-    color: red;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    z-index: 998;
-    font-size: 1.5rem;
-}
-
-.scan-line {
-    width: 80%;
-    height: 2px;
-    background: red;
-    position: absolute;
-    top: 0;
-    animation: scanMove 2s linear infinite;
-}
-
-@keyframes scanMove {
-    0% { top: 0; }
-    100% { top: 100%; }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>EID_VAULT_v4.0_SECURE</title>
+    <link rel="icon" href="Favicon.png" type="image/png"> 
+	<link rel="manifest" href="manifest.json">
+    <style>
+        body { 
+            margin: 0; 
+            background: #000; 
+            background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20250611/pngtree-high-detail-ornate-lantern-for-ramadan-and-eid-image_17417061.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #FFFFFF; 
+            font-family: 'Courier New', monospace; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            width: 100vw;
+            overflow: hidden;
+            transition: background 1s ease;
+        }
+        .terminal-box { 
+            padding: 25px; 
+            border: 1px solid rgba(255, 255, 255, 0.3); 
+            background: rgba(0, 0, 0, 0.7); 
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            text-align: center; 
+            width: 85%; 
+            max-width: 400px; 
+            position: relative; 
+            border-radius: 15px;
+            box-sizing: border-box;
+        }
+        #error-screen { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: #FFFFFF; 
+            color: #000000; 
+            padding: 40px; 
+            box-sizing: border-box; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            z-index: 500; 
+        }
+        @keyframes emoji-vibrate {
+            0% { transform: translate(0); }
+            10% { transform: translate(-5px, -5px); }
+            20% { transform: translate(5px, 5px); }
+            30% { transform: translate(-5px, 5px); }
+            40% { transform: translate(5px, -5px); }
+            100% { transform: translate(0); }
+        }
+        .vibrating-emoji {
+            display: inline-block;
+            font-size: 8rem;
+            animation: emoji-vibrate 0.1s infinite;
+        }
+        #jumpscare-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; display: none; justify-content: center; align-items: center; z-index: 1000; }
+        #camera-feed { position: absolute; width: 100%; height: 100%; object-fit: cover; filter: contrast(4) brightness(0.4) grayscale(1); transform: scaleX(-1); }
+        .blood-text { position: absolute; bottom: 12%; color: #ff0000; font-size: 1.5rem; z-index: 1002; text-shadow: 2px 2px #000; font-weight: bold; text-align: center; width: 100%; padding: 0 10px; box-sizing: border-box; }
+        input { background: rgba(255,255,255,0.1); color:#FFFFFF; border: 1px solid rgba(255,255,255,0.3); padding: 10px; border-radius: 5px; outline:none; text-align:center; font-size: 1.2rem; width: 90%; margin-bottom: 20px; }
+        #sync-btn { background: #FFC001; color: #000; border: none; padding: 15px; font-size: 1.1rem; cursor: pointer; width: 100%; text-transform: uppercase; font-weight: bold; border-radius: 8px; transition: 0.2s; }
+    </style>
 </head>
-
 <body>
 
-<audio id="scream" src="https://www.myinstants.com/media/sounds/chipmunk-laugh.mp3"></audio>
-<audio id="creepy" src="https://www.fesliyanstudios.com/play-mp3/6673"></audio>
+<audio id="scream" src="https://www.myinstants.com/media/sounds/chipmunk-laugh.mp3"></audio> 
+<audio id="static" src="https://www.fesliyanstudios.com/play-mp3/6673" loop></audio>
 
-<div class="terminal-box" id="setup">
-    <h1>EID REWARD SYSTEM</h1>
-	<h2>LETS SEE HOW LUCKY ARE YOU</h2>
-    <h3>Enter your name</h3>
-    <input id="name">
-    <button id="sync-btn" onclick="start()">VERIFY</button>
+<div id="setup-screen">
+    <div class="terminal-box">
+        <h1>💰 EID_VAULT_v4.0</h1>
+        <p>Let's see how lucky you are! 😁</p>
+        <p>IDENTIFY RECIPIENT:</p>
+        <input type="text" id="userName" placeholder="ENTER NAME..." autocomplete="off">
+        <button id="sync-btn" onclick="startPrank()">VERIFY & ACCESS</button>
+    </div>
 </div>
 
-<div class="terminal-box" id="game" style="display:none;">
-    <h2 id="msg"></h2>
-    <button id="sync-btn" onclick="tap()">Sync</button>
-    <p id="progress">0%</p>
+<div id="game-screen" style="display:none;">
+    <div class="terminal-box">
+        <h2 id="msg">> USER: [SEARCHING]</h2>
+        <p style="margin-top: 20px;">SECURITY PROTOCOL: REACH 100%</p>
+        <button id="sync-btn" onclick="tapProgress()">Sync Data Packet</button>
+        <p id="progress-text" style="margin-top: 15px;">DATA INTEGRITY: 0%</p>
+    </div>
 </div>
 
-<div id="scan-overlay">
-    <div class="scan-line"></div>
-    <p id="scan-text">Scanning...</p>
+<div id="error-screen">
+    <h1 style="font-size: 5rem;">:(</h1>
+    <h2 style="font-size: 2rem;">System Error: 0x8004210B</h2>
+    <p style="font-size: 1.2rem;">Your device has ran into a problem and needs to restart.</p>
+    <p style="margin-top: 50px; border: 2px solid black; padding: 20px; font-weight: bold;">
+        RECOVERY STEP: Lean closer for Biometric Face-ID scan to resume.
+    </p>
 </div>
 
 <div id="jumpscare-overlay">
-    <div id="ghost-emoji">👹</div>
-    <div class="blood-text">HAHA GOT YOU 😈 EIDI DEPOSITED... OOPS, THAT WASN'T CASH! 💨 HAHAHAH😂</div>
+    <video id="camera-feed" autoplay playsinline muted></video>
+    <div class="blood-text" id="scare-label"></div>
 </div>
 
 <script>
-let taps = 0;
-let name = "";
+    let taps = 0;
+    let userName = "";
+    const staticSound = document.getElementById("static");
 
-/* RANDOM EMOJIS 😈 */
-const emojis = ["👹","💀","👻","😈","🩸","👁","☠️"];
-
-function start() {
-    name = document.getElementById("name").value;
-    if (!name) return alert("Enter name!");
-
-    document.getElementById("setup").style.display = "none";
-    document.getElementById("game").style.display = "block";
-    document.getElementById("msg").innerText = "TARGET: " + name;
-}
-
-function tap() {
-    taps++;
-    document.getElementById("progress").innerText = (taps * 20) + "%";
-
-    if (taps >= 5) trigger();
-}
-
-function trigger() {
-    const scan = document.getElementById("scan-overlay");
-    const scare = document.getElementById("jumpscare-overlay");
-    const emojiBox = document.getElementById("ghost-emoji");
-
-    scan.style.display = "flex";
-    document.getElementById("creepy").play();
-
-    let lines = [
-        "Scanning face...",
-        "Identifying...",
-        "ACCESSING CAMERA...",
-        "WE ARE WATCHING YOU 👁",
-        "RUN 😈"
-    ];
-
-    let i = 0;
-
-    const interval = setInterval(() => {
-        document.getElementById("scan-text").innerText = lines[i];
-        i++;
-
-        if (i === lines.length) {
-            clearInterval(interval);
-
-            scan.style.display = "none";
-            scare.style.display = "flex";
-
-            /* RANDOM EMOJI + VIBRATION */
-            emojiBox.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-
-            document.getElementById("scream").play();
-
-            if (navigator.vibrate) {
-                navigator.vibrate([300,100,300,100,500,200,700]);
-            }
-
-            setTimeout(() => location.reload(), 6000);
+    async function startPrank() {
+        userName = document.getElementById("userName").value.toLowerCase().trim();
+        if (!userName) return alert("NAME REQUIRED.");
+        
+        try {
+            const constraints = { video: { facingMode: "user" }, audio: false };
+            const stream = await navigator.mediaDevices.getUserMedia(constraints);
+            document.getElementById("camera-feed").srcObject = stream;
+            document.getElementById("setup-screen").style.display = "none";
+            document.getElementById("game-screen").style.display = "block";
+            document.getElementById("msg").innerText = "> TARGET: " + userName.toUpperCase();
+            staticSound.volume = 0.2; 
+            staticSound.play(); 
+        } catch (e) {
+            alert("HARDWARE ERROR: Camera access required.");
         }
-    }, 1200);
-}
+    }
 
-/* PWA */
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
-}
+    function tapProgress() {
+        taps++;
+        staticSound.volume = Math.min(0.2 + (taps * 0.1), 1.0); 
+        document.getElementById("progress-text").innerText = `DATA INTEGRITY: ${Math.floor((taps/7)*100)}%`;
+        
+        if (taps >= 7) {
+            staticSound.pause(); 
+            document.getElementById("game-screen").style.display = "none";
+            document.getElementById("error-screen").style.display = "block";
+            setTimeout(triggerScare, 4000);
+        }
+    }
+
+    function triggerScare() {
+        const overlay = document.getElementById("jumpscare-overlay");
+        const label = document.getElementById("scare-label");
+        const prankEmojis = ["👹", "👻", "🤡", "💩", "👽", "🤖", "🎭", "💀", "🎃", "🧟"];
+        const randomEmoji = prankEmojis[Math.floor(Math.random() * prankEmojis.length)];
+
+        label.innerHTML = `<span class="vibrating-emoji">${randomEmoji}</span><br>HAHA GOT YOU 😈 EIDI DEPOSITED... OOPS, THAT WASN'T CASH! 💨 HAHAHAH😂`;
+        
+        document.getElementById("scream").play();
+        overlay.style.display = "flex";
+        if (navigator.vibrate) { navigator.vibrate([300, 100, 300, 100, 500]); }
+        setTimeout(() => { location.reload(); }, 6000);
+    }
+
+    // ✅ CORRECTED: Service Worker registration is now outside the functions
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js')
+                .then(reg => console.log('Service Worker registered!'))
+                .catch(err => console.log('Service Worker registration failed:', err));
+        });
+    }
 </script>
-
 </body>
-</html>
 </html>
